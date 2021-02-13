@@ -5,7 +5,7 @@ const app = express();
 const requireEnvConfig = require('./dotenv/config')
 
 
-
+console.log(process.env.pk);
 // Define middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
