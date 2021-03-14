@@ -1,8 +1,8 @@
 const express = require("express");
 const path = require("path");
-const PORT = process.env.PORT;
+
 const app = express();
-require('dotenv').config() //Invoke dotEnv Configuration
+
 
 
 
@@ -26,10 +26,13 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
   });
 } else {
+  require('dotenv').config() //Invoke dotEnv Configuration if in Development Environment
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "./client/public/index.html"));
   });
 }
+
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
   console.log(`Express server now is up and running on port ${PORT}!`);
