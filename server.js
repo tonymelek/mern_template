@@ -14,10 +14,11 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 } else {
   app.use(express.static("client/public"))
+  require('dotenv').config() //Invoke dotEnv Configuration if in Development Environment
 }
 
-//  API routes
 
+//  API routes
 app.use('/api', require('./routes/api-routes'))
 
 // Send every other request to the React app
@@ -26,7 +27,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
   });
 } else {
-  require('dotenv').config() //Invoke dotEnv Configuration if in Development Environment
+
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "./client/public/index.html"));
   });
